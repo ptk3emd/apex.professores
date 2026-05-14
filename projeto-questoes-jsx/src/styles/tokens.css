@@ -1,0 +1,326 @@
+/* ═══════════════════════════════════════════════════════════════════
+   APEX MEDICINA — Design Token CSS
+   Source of truth for all color, typography, spacing, and shadow vars.
+   Consumed by UI kit components and preview cards.
+   Font: Atkinson Hyperlegible (Google Fonts, 400/700)
+   ═══════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* ───────────────────────────────────────────────────────────────────
+   BRAND COLOR SCALE — Medical Crimson
+   ─────────────────────────────────────────────────────────────────── */
+:root {
+  --brand-50:   #FCF4F4;
+  --brand-100:  #F7E1E1;
+  --brand-200:  #EEC3C3;
+  --brand-300:  #DF9696;
+  --brand-400:  #C96565;
+  --brand-500:  #A43939;   /* PRIMARY */
+  --brand-600:  #913232;   /* hover */
+  --brand-700:  #792C2C;   /* active */
+  --brand-800:  #642929;
+  --brand-900:  #3F1B1B;   /* dark-mode soft bg */
+  --brand-950:  #241010;
+
+  /* Aliases */
+  --color-primary:          #A43939;
+  --color-primary-hover:    #913232;
+  --color-primary-active:   #792C2C;
+  --color-primary-soft:     #FCF4F4;
+  --color-primary-border:   #EEC3C3;
+  --color-primary-fg:       #FFF8F8;
+  --color-primary-muted:    #DF9696;
+  --color-primary-focus:    #C96565;
+}
+
+/* ───────────────────────────────────────────────────────────────────
+   LIGHT MODE SEMANTIC TOKENS
+   ─────────────────────────────────────────────────────────────────── */
+:root,
+:root.light {
+  /* Backgrounds (RGB triplets for alpha compositing) */
+  --color-bg:          248 250 252;   /* slate-50  — page canvas         */
+  --color-surface:     255 255 255;   /* white     — elevated panels     */
+  --color-card:        255 255 255;   /* white     — primary cards       */
+  --color-card-nested: 241 245 249;   /* slate-100 — card-in-card        */
+  --color-muted:       241 245 249;   /* slate-100 — chips, fills        */
+
+  /* Text */
+  --color-text:        15  23  42;    /* slate-900 — primary             */
+  --color-text-muted:  100 116 139;   /* slate-500 — supporting          */
+  --color-text-subtle: 148 163 184;   /* slate-400 — very muted          */
+
+  /* Border */
+  --color-border:      226 232 240;   /* slate-200                       */
+
+  /* Shadows — whisper-soft */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 6px rgba(0,0,0,.06), 0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+  --shadow-xl: 0 16px 40px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.04);
+  --shadow-card: 0 8px 40px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.04),
+                 0 1px 3px rgba(0,0,0,0.03), 0 0 0 1px rgba(0,0,0,0.04);
+
+  /* Modal overlay */
+  --overlay-bg: rgba(15, 23, 42, .45);
+
+  /* App shell backgrounds (non-token, fixed) */
+  --shell-bg: #31302e;
+  --quiz-bg:  #f6f5f4;
+  --quiz-bg-dark: #31302e;
+}
+
+/* ───────────────────────────────────────────────────────────────────
+   DARK MODE SEMANTIC TOKENS
+   ─────────────────────────────────────────────────────────────────── */
+:root.dark,
+.dark {
+  --color-primary-soft:   #3F1B1B;
+  --color-primary-border: #642929;
+  --color-primary-muted:  #C96565;
+  --color-primary-focus:  #EEC3C3;
+  --color-primary-hover:  #B84141;
+
+  --color-bg:          15  23  42;    /* slate-900                       */
+  --color-surface:     30  41  59;    /* slate-800                       */
+  --color-card:        30  41  59;    /* slate-800                       */
+  --color-card-nested: 15  23  42;    /* slate-900                       */
+  --color-muted:       51  65  85;    /* slate-700                       */
+
+  --color-text:        248 250 252;   /* slate-50                        */
+  --color-text-muted:  148 163 184;   /* slate-400                       */
+  --color-text-subtle: 100 116 139;   /* slate-500                       */
+
+  --color-border:      51  65  85;    /* slate-700                       */
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.25);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.35);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.50), 0 2px 6px rgba(0,0,0,.30);
+  --shadow-xl: 0 16px 48px rgba(0,0,0,.60), 0 4px 12px rgba(0,0,0,.40);
+  --shadow-card: 0 8px 40px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.06);
+
+  --overlay-bg: rgba(0, 0, 0, .65);
+}
+
+/* ───────────────────────────────────────────────────────────────────
+   SEMANTIC UTILITY CLASSES
+   Use these in components instead of raw RGB values.
+   ─────────────────────────────────────────────────────────────────── */
+
+/* Backgrounds */
+.bg-app-bg          { background-color: rgb(var(--color-bg)); }
+.bg-app-surface     { background-color: rgb(var(--color-surface)); }
+.bg-app-card        { background-color: rgb(var(--color-card)); }
+.bg-app-card-nested { background-color: rgb(var(--color-card-nested)); }
+.bg-app-muted       { background-color: rgb(var(--color-muted)); }
+.bg-app-primary     { background-color: var(--color-primary); }
+
+/* Text */
+.text-app-text        { color: rgb(var(--color-text)); }
+.text-app-text-muted  { color: rgb(var(--color-text-muted)); }
+.text-app-text-subtle { color: rgb(var(--color-text-subtle)); }
+.text-app-primary     { color: var(--color-primary); }
+
+/* Border */
+.border-app-border { border-color: rgb(var(--color-border)); }
+
+/* Shadows */
+.shadow-app-sm { box-shadow: var(--shadow-sm); }
+.shadow-app-md { box-shadow: var(--shadow-md); }
+.shadow-app-lg { box-shadow: var(--shadow-lg); }
+.shadow-app-xl { box-shadow: var(--shadow-xl); }
+.shadow-card   { box-shadow: var(--shadow-card); }
+
+/* ───────────────────────────────────────────────────────────────────
+   TYPOGRAPHY TOKENS
+   ─────────────────────────────────────────────────────────────────── */
+:root {
+  /* Font stacks */
+  --font-sans: 'Atkinson Hyperlegible', Arial, system-ui, sans-serif;
+  --font-mono: 'Atkinson Hyperlegible', 'Courier New', monospace; /* no true mono; matches codebase */
+
+  /* Size scale */
+  --text-micro:   10px;   /* micro labels */
+  --text-xs:      11px;   /* caption, badge text */
+  --text-sm:      12px;   /* field labels */
+  --text-base:    14px;   /* supporting body */
+  --text-md:      16px;   /* standard body */
+  --text-lg:      18px;   /* card body, question text */
+  --text-xl:      20px;   /* subheadings */
+  --text-2xl:     24px;   /* section headings */
+  --text-3xl:     30px;   /* page headings */
+  --text-4xl:     36px;   /* hero numbers / stats */
+  --text-5xl:     48px;   /* rating / big numbers */
+  --text-6xl:     60px;   /* splash */
+
+  /* Weights */
+  --weight-normal:    400;
+  --weight-medium:    500;  /* (not in Atkinson — falls back to 400) */
+  --weight-semibold:  600;  /* (not in Atkinson — falls back to 700) */
+  --weight-bold:      700;
+  --weight-black:     900;  /* (not in Atkinson — falls back to 700) */
+
+  /* Note: Atkinson Hyperlegible only ships 400 and 700.
+     Tailwind font-bold/font-extrabold/font-black all resolve to 700.
+     font-normal/font-medium/font-semibold resolve to 400.
+     This is intentional — the app uses the binary 400/700 ladder. */
+
+  /* Line heights */
+  --leading-tight:  1.2;
+  --leading-snug:   1.4;
+  --leading-base:   1.6;
+  --leading-read:   1.8;  /* question enunciados */
+  --leading-loose:  2.0;
+
+  /* Letter spacing */
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.05em;
+  --tracking-wider:   0.1em;
+  --tracking-widest:  0.15em;
+}
+
+/* Type semantic classes */
+.type-hero {
+  font-family: var(--font-sans);
+  font-size: var(--text-5xl);
+  font-weight: var(--weight-black);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.type-h1 {
+  font-family: var(--font-sans);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-black);
+  line-height: var(--leading-tight);
+}
+
+.type-h2 {
+  font-family: var(--font-sans);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+}
+
+.type-h3 {
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+}
+
+.type-body {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-base);
+}
+
+.type-body-strong {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-base);
+}
+
+.type-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
+
+.type-caption {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-snug);
+}
+
+.type-question {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-read);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* ───────────────────────────────────────────────────────────────────
+   SPACING SCALE
+   ─────────────────────────────────────────────────────────────────── */
+:root {
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+
+  /* Component-level semantic spacing */
+  --card-padding:       var(--space-5);   /* 20px */
+  --card-padding-lg:    var(--space-6);   /* 24px */
+  --section-gap:        var(--space-6);   /* 24px */
+  --section-gap-lg:     var(--space-8);   /* 32px */
+  --page-padding:       var(--space-4);   /* 16px */
+
+  /* Border radius scale */
+  --radius-sm:    8px;    /* small chips, badges */
+  --radius-md:    12px;   /* inputs, icon containers */
+  --radius-lg:    16px;   /* standard cards */
+  --radius-xl:    24px;   /* hero cards, result screens */
+  --radius-2xl:   32px;   /* login card, large modals */
+  --radius-full:  9999px; /* pills, avatars */
+}
+
+/* ───────────────────────────────────────────────────────────────────
+   BASE RESET
+   ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  border-color: rgb(var(--color-border));
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-base);
+  color: rgb(var(--color-text));
+  background-color: rgb(var(--color-bg));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  color: rgb(var(--color-text));
+  margin: 0;
+}
+
+a { color: var(--color-primary); }
+
+/* Interactive transitions */
+button, a, input, select, textarea {
+  transition: all 180ms ease;
+}
+
+/* Scrollbar */
+.custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--color-border));
+  border-radius: 20px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--color-text-muted));
+}

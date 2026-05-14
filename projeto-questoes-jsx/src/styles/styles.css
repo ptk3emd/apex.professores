@@ -1,0 +1,499 @@
+/* ─────────────────────────────────────────────────────────────
+   Apex Medicina — Criar questão autoral · view styles
+   Only base / unscoped interactive styles. Layout is inline.
+   ───────────────────────────────────────────────────────────── */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f5f4f1;
+  color: rgb(15 23 42);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Spin */
+@keyframes apex-spin { to { transform: rotate(360deg); } }
+
+/* Fade / slide entrance */
+@keyframes apex-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.apex-enter { animation: apex-fade-in .35s ease both; }
+
+@keyframes apex-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .35; }
+}
+
+@keyframes apex-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── INPUTS ─────────────────────────────────────────────────── */
+.apex-input,
+.apex-textarea,
+.apex-select {
+  width: 100%;
+  font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #0f172a;
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  line-height: 1.5;
+}
+.apex-input::placeholder,
+.apex-textarea::placeholder {
+  color: #94a3b8;
+}
+.apex-input:hover,
+.apex-textarea:hover,
+.apex-select:hover {
+  border-color: #cbd5e1;
+}
+.apex-input:focus,
+.apex-textarea:focus,
+.apex-select:focus {
+  border-color: #A43939;
+  box-shadow: 0 0 0 4px rgba(164, 57, 57, 0.10);
+}
+.apex-textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.65;
+}
+.apex-input.invalid,
+.apex-textarea.invalid,
+.apex-select.invalid {
+  border-color: #dc2626;
+  background: #fef2f2;
+}
+.apex-input.invalid:focus,
+.apex-textarea.invalid:focus {
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.10);
+}
+.apex-select {
+  cursor: pointer;
+  appearance: none;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────────── */
+.apex-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all .18s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+.apex-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+.apex-btn-primary {
+  background: #A43939;
+  color: white;
+  box-shadow: 0 6px 16px -6px rgba(164,57,57,.5), 0 1px 2px rgba(0,0,0,.05);
+}
+.apex-btn-primary:hover:not(:disabled) {
+  background: #913232;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -8px rgba(164,57,57,.55);
+}
+.apex-btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.apex-btn-secondary {
+  background: white;
+  color: #0f172a;
+  border-color: #e2e8f0;
+}
+.apex-btn-secondary:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+.apex-btn-ghost {
+  background: transparent;
+  color: #64748b;
+  padding: 8px 14px;
+}
+.apex-btn-ghost:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+.apex-btn-danger {
+  background: white;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+.apex-btn-danger:hover:not(:disabled) {
+  background: #fef2f2;
+}
+
+/* ── CHIPS ───────────────────────────────────────────────────── */
+.apex-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 9999px;
+  border: 1.5px solid #e2e8f0;
+  background: white;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .18s ease;
+  font-family: inherit;
+}
+.apex-chip:hover { border-color: #cbd5e1; color: #0f172a; }
+.apex-chip.active {
+  background: #FCF4F4;
+  border-color: #A43939;
+  color: #A43939;
+  box-shadow: inset 0 0 0 1px #A43939;
+}
+
+/* ── ALERT inline ─────────────────────────────────────────────── */
+.apex-helper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #dc2626;
+  animation: apex-fade-in .25s ease both;
+}
+
+/* ── Tooltip-y micro label ───────────────────────────────────── */
+.apex-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+.apex-label .req {
+  color: #A43939;
+  font-size: 11px;
+}
+
+/* Card hover */
+.apex-card {
+  background: white;
+  border: 1px solid #ececea;
+  border-radius: 20px;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.03),
+    0 1px 1px rgba(15, 23, 42, 0.02);
+}
+
+/* Selection card */
+.apex-sel-card {
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 18px 18px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: all .18s ease;
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.apex-sel-card:hover {
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15,23,42,.04);
+}
+.apex-sel-card.active {
+  border-color: #A43939;
+  background: #FCF4F4;
+  box-shadow:
+    0 0 0 4px rgba(164, 57, 57, 0.08),
+    0 6px 14px -4px rgba(164, 57, 57, .15);
+}
+
+/* Scroll container */
+.apex-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.apex-scroll::-webkit-scrollbar-track { background: transparent; }
+.apex-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.apex-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Combobox */
+.apex-combo {
+  position: relative;
+}
+.apex-combo-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(15,23,42,.12), 0 4px 8px rgba(15,23,42,.05);
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 6px;
+  animation: apex-fade-in .15s ease both;
+}
+.apex-combo-item {
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-size: 14px;
+  color: #0f172a;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+.apex-combo-item:hover, .apex-combo-item.focused {
+  background: #f1f5f9;
+}
+.apex-combo-item.create {
+  border-top: 1px solid #f1f5f9;
+  margin-top: 6px;
+  padding-top: 12px;
+  color: #A43939;
+  font-weight: 700;
+}
+
+/* Section gradient backplate */
+.apex-grad {
+  background:
+    radial-gradient(900px 500px at 90% -10%, rgba(164,57,57,.05), transparent 60%),
+    radial-gradient(700px 400px at -10% 110%, rgba(164,57,57,.04), transparent 60%),
+    #f5f4f1;
+}
+
+/* Toggle */
+.apex-toggle {
+  width: 38px;
+  height: 22px;
+  border-radius: 9999px;
+  background: #cbd5e1;
+  position: relative;
+  transition: background .2s ease;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+.apex-toggle.on { background: #A43939; }
+.apex-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: white;
+  border-radius: 9999px;
+  transition: transform .2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+.apex-toggle.on::after { transform: translateX(16px); }
+
+/* Sheet preview table */
+.apex-table {
+  font-family: 'Atkinson Hyperlegible', monospace;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+  table-layout: fixed;
+}
+.apex-table th, .apex-table td {
+  padding: 7px 9px;
+  text-align: left;
+  border: 1px solid #e2e8f0;
+  vertical-align: top;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.apex-table th {
+  background: #f8fafc;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #475569;
+  font-family: inherit;
+}
+.apex-table td {
+  background: white;
+  color: #0f172a;
+  font-weight: 500;
+}
+.apex-table td.correta-cell {
+  background: #fef3c7;
+  font-weight: 700;
+  text-align: center;
+  color: #92400e;
+}
+
+/* ── MODAL ───────────────────────────────────────────────────── */
+.apex-modal-backdrop {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.apex-modal {
+  background: white;
+  border-radius: 22px;
+  width: 100%;
+  max-width: 980px;
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 80px rgba(15,23,42,.4), 0 4px 12px rgba(15,23,42,.15);
+  overflow: hidden;
+  animation: apex-modal-in .25s ease both;
+}
+@keyframes apex-modal-in {
+  from { opacity: 0; transform: scale(0.97) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── SIDEBAR — questions list ────────────────────────────────── */
+.apex-side {
+  position: sticky;
+  top: 92px;
+  align-self: flex-start;
+  width: 280px;
+  flex-shrink: 0;
+}
+.apex-side-card {
+  background: white;
+  border: 1px solid #ececea;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(15,23,42,.03);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: calc(100vh - 120px);
+}
+.apex-side-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  margin: 6px -4px 8px;
+  padding: 0 4px;
+}
+.apex-q-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 11px;
+  border: 1.5px solid transparent;
+  background: #fafaf8;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  transition: all .15s ease;
+  position: relative;
+}
+.apex-q-row:hover {
+  background: white;
+  border-color: #ececea;
+}
+.apex-q-row.active {
+  background: white;
+  border-color: #A43939;
+  box-shadow: 0 0 0 4px rgba(164,57,57,.08), 0 4px 12px -4px rgba(164,57,57,.12);
+}
+.apex-q-row .q-actions {
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+.apex-q-row:hover .q-actions,
+.apex-q-row.active .q-actions {
+  opacity: 1;
+}
+.apex-q-iconbtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  color: #94a3b8;
+  display: inline-flex;
+}
+.apex-q-iconbtn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+.apex-q-iconbtn.danger:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Status dot */
+.apex-status-dot {
+  width: 8px; height: 8px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.apex-status-dot.ready    { background: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,.15); }
+.apex-status-dot.incomplete { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,.15); }
+.apex-status-dot.blank    { background: #cbd5e1; }
+
+/* Toast / persistence indicator */
+.apex-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* Layout switch: stack sidebar below at narrow widths */
+@media (max-width: 980px) {
+  .apex-edit-layout { grid-template-columns: 1fr !important; }
+  .apex-side {
+    position: static;
+    width: 100%;
+  }
+  .apex-side-card {
+    max-height: none;
+  }
+}

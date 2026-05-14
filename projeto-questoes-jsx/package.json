@@ -1,0 +1,13 @@
+{
+  "name": "apex-professores",
+  "version": "1.0.0",
+  "description": "Sistema de criação de questões",
+  "main": "index.js",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "npx vite"
+  },
+  "keywords": ["questões", "autoral"],
+  "author": "",
+  "license": "MIT"
+}
