@@ -35,9 +35,9 @@ export const FieldError = ({ message }) =>
    ──────────────────────────────────────────────────────────── */
 
 export const FormCard = ({ index, title, eyebrow, subtitle, badge, children, error }) => (
-  <section className="apex-card apex-enter" style={{ padding:'28px 32px 32px', position:'relative' }}>
-    <header style={{ display:'flex', alignItems:'flex-start', gap:16, marginBottom:22 }}>
-      <div style={{
+  <section className="apex-card apex-enter apex-form-card" style={{ padding:'28px 32px 32px', position:'relative' }}>
+    <header className="apex-form-card-header" style={{ display:'flex', alignItems:'flex-start', gap:16, marginBottom:22 }}>
+      <div className="apex-form-card-num" style={{
         flexShrink:0,
         width:36, height:36,
         borderRadius:10,
@@ -465,7 +465,7 @@ export const ClassificationCard = ({ data, set, errors }) => {
   return (
     <FormCard index={5} eyebrow="Metadados" title="Classificação pedagógica"
       subtitle="Esses campos alimentam o Apex-CORE (Grande Área → Especialidade → Tema → Competência).">
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16 }}>
+      <div className="apex-classification-grid" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16 }}>
 
         {/* Categoria */}
         <div>
@@ -593,7 +593,7 @@ export const ClassificationCard = ({ data, set, errors }) => {
 export const ActionsCard = ({ onSaveDraft, onReview, draftSaved, errorList }) => {
   const hasErrors = errorList && errorList.length > 0;
   return (
-    <section className="apex-card apex-enter" style={{ padding:'24px 32px', position:'sticky', bottom:16, zIndex:10,
+    <section className="apex-card apex-enter apex-actions-card" style={{ padding:'24px 32px', position:'sticky', bottom:16, zIndex:10,
       boxShadow:'0 -2px 0 white, 0 14px 30px -10px rgba(15,23,42,.12), 0 4px 10px -4px rgba(15,23,42,.06)' }}>
       {hasErrors && (
         <div style={{
@@ -615,12 +615,12 @@ export const ActionsCard = ({ onSaveDraft, onReview, draftSaved, errorList }) =>
           </div>
         </div>
       )}
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:14, flexWrap:'wrap' }}>
+      <div className="apex-footer-actions-wrap" style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:14, flexWrap:'wrap' }}>
         <div style={{ display:'flex', alignItems:'center', gap:8, color:'#64748b', fontSize:12.5, fontWeight:500 }}>
           <Icon name="info" size={14}/>
           <span>Você poderá revisar a questão antes de enviar para a planilha.</span>
         </div>
-        <div style={{ display:'flex', gap:10, alignItems:'center' }}>
+        <div className="apex-footer-actions" style={{ display:'flex', gap:10, alignItems:'center' }}>
           {draftSaved && (
             <span style={{ fontSize:11, color:'#16a34a', fontWeight:700, display:'inline-flex', alignItems:'center', gap:5 }}>
               <Icon name="check" size={12} strokeWidth={3}/> Rascunho salvo

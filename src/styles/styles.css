@@ -486,7 +486,9 @@ html, body {
   font-weight: 600;
 }
 
-/* Layout switch: stack sidebar below at narrow widths */
+/* ── RESPONSIVE LAYOUT ───────────────────────────────────────── */
+
+/* Tablet: stack sidebar below form */
 @media (max-width: 980px) {
   .apex-edit-layout { grid-template-columns: 1fr !important; }
   .apex-side {
@@ -495,5 +497,224 @@ html, body {
   }
   .apex-side-card {
     max-height: none;
+  }
+}
+
+/* Small tablet / large phone */
+@media (max-width: 768px) {
+  .apex-topbar-inner {
+    padding: 12px 20px !important;
+    gap: 12px !important;
+  }
+  .apex-topbar-right {
+    gap: 10px !important;
+  }
+  .apex-main {
+    padding: 0 20px 60px !important;
+  }
+  .apex-form-card {
+    padding: 22px 22px 26px !important;
+  }
+  .apex-actions-card {
+    padding: 18px 22px !important;
+  }
+  .apex-hero-section {
+    padding: 24px 0 20px !important;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 640px) {
+  /* TopBar: hide breadcrumb details, keep logo */
+  .apex-topbar-inner {
+    padding: 10px 16px !important;
+  }
+  .apex-topbar-breadcrumb {
+    display: none !important;
+  }
+  .apex-topbar-right {
+    gap: 8px !important;
+  }
+  .apex-topbar-help-text {
+    display: none !important;
+  }
+  .apex-toast {
+    display: none !important;
+  }
+
+  /* Main container */
+  .apex-main {
+    padding: 0 14px 60px !important;
+  }
+
+  /* Hero section */
+  .apex-hero-section {
+    padding: 20px 0 16px !important;
+  }
+  .apex-hero-h1 {
+    font-size: 26px !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.15 !important;
+  }
+  .apex-hero-desc {
+    font-size: 14px !important;
+    margin-top: 8px !important;
+  }
+  .apex-hero-badge {
+    font-size: 9px !important;
+    padding: 4px 9px !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* Steps bar: compact in mobile */
+  .apex-steps-bar {
+    padding: 12px 14px !important;
+    gap: 8px !important;
+    margin-top: 16px !important;
+    overflow-x: auto !important;
+  }
+  .apex-step-item {
+    min-width: 0;
+    gap: 7px !important;
+  }
+  .apex-step-icon {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 12px !important;
+    border-radius: 8px !important;
+  }
+  .apex-step-eyebrow {
+    display: none !important;
+  }
+  .apex-step-label {
+    font-size: 12px !important;
+  }
+  .apex-step-connector {
+    width: 16px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Form cards */
+  .apex-form-card {
+    padding: 18px 16px 20px !important;
+    border-radius: 16px !important;
+  }
+  .apex-form-card-header {
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+  }
+  .apex-form-card-num {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 12px !important;
+  }
+
+  /* Classification grid: 1 column on mobile */
+  .apex-classification-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .apex-classification-grid > div[style*="span 2"] {
+    grid-column: span 1 !important;
+  }
+
+  /* Actions bar */
+  .apex-actions-card {
+    padding: 16px !important;
+    border-radius: 14px !important;
+    bottom: 10px !important;
+  }
+  .apex-footer-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+  .apex-footer-actions .apex-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .apex-footer-status {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+
+  /* Buttons */
+  .apex-btn {
+    min-height: 44px;
+  }
+  .apex-chip {
+    padding: 8px 12px;
+    min-height: 40px;
+  }
+
+  /* Sidebar */
+  .apex-side-card {
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .apex-q-row {
+    padding: 12px 10px;
+    min-height: 52px;
+  }
+
+  /* Modal */
+  .apex-modal-backdrop {
+    padding: 12px !important;
+    align-items: flex-end !important;
+  }
+  .apex-modal {
+    border-radius: 20px 20px 0 0 !important;
+    max-height: 90vh !important;
+  }
+
+  /* QuestionFormFooter */
+  .apex-q-footer {
+    padding: 16px !important;
+  }
+  .apex-q-footer-inner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .apex-q-footer-buttons {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .apex-q-footer-buttons .apex-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* ActionsCard footer */
+  .apex-footer-actions-wrap {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .apex-footer-actions {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .apex-footer-actions .apex-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Classification grid span 2 reset */
+  .apex-classification-grid > * {
+    grid-column: span 1 !important;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+  .apex-main {
+    padding: 0 10px 60px !important;
+  }
+  .apex-form-card {
+    padding: 14px 12px 16px !important;
+  }
+  .apex-hero-h1 {
+    font-size: 22px !important;
   }
 }
