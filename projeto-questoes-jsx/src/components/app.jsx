@@ -1,7 +1,6 @@
 // Apex Medicina — Criar questão autoral · main App (multi-question, autosave, tutorial)
 
 import React, { useState, useCallback, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
 
 // Import all components
 import { Icon, ApexLogo, Spinner } from './icons.jsx';
