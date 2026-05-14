@@ -1,9 +1,9 @@
 // Apex Medicina — Autosave / persistence layer (localStorage)
 // One key holds the whole working batch.
 
-window.APEX_STORAGE_KEY = 'apex-autoral-drafts-v1';
+export const APEX_STORAGE_KEY = 'apex-autoral-drafts-v1';
 
-window.ApexStorage = {
+export const ApexStorage = {
   read() {
     try {
       const raw = localStorage.getItem(window.APEX_STORAGE_KEY);
@@ -59,3 +59,8 @@ window.ApexStorage = {
     return false;
   },
 };
+
+// Keep window global for backward compatibility during migration
+if (typeof window !== 'undefined') {
+  Object.assign(window, { APEX_STORAGE_KEY, ApexStorage });
+}

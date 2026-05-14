@@ -1,24 +1,28 @@
 // Apex Medicina — Sidebar: lista de questões em rascunho
 
+import React from 'react';
+import { Icon } from './icons.jsx';
+import { ApexStorage } from '../scripts/storage.js';
+
 /**
  * Question status:
  *   'blank'      — no content yet (initial state)
  *   'incomplete' — some content but missing required fields
  *   'ready'      — all required fields filled, ready for review
  */
-function questionStatus(q, validate) {
-  if (!window.ApexStorage.questionHasAnyContent(q)) return 'blank';
+export function questionStatus(q, validate) {
+  if (!ApexStorage.questionHasAnyContent(q)) return 'blank';
   const { summary } = validate(q);
   return summary.length === 0 ? 'ready' : 'incomplete';
 }
 
-const STATUS_META = {
+export const STATUS_META = {
   blank:      { label: 'Em branco',         color: '#94a3b8', bg: '#f1f5f9', short: 'Em branco' },
   incomplete: { label: 'Incompleta',        color: '#b45309', bg: '#fef3c7', short: 'Incompleta' },
   ready:      { label: 'Pronta p/ revisão', color: '#15803d', bg: '#dcfce7', short: 'Pronta' },
 };
 
-function questionTitle(q, index) {
+export function questionTitle(q, index) {
   const e = q.enunciado?.trim();
   if (!e) return `Questão ${index + 1}`;
   // first 50 chars or first sentence
@@ -26,7 +30,7 @@ function questionTitle(q, index) {
   return cut;
 }
 
-const SidebarQuestion = ({ q, index, active, status, onOpen, onDuplicate, onRemove }) => {
+export const SidebarQuestion = ({ q, index, active, status, onOpen, onDuplicate, onRemove }) => {
   const meta = STATUS_META[status];
   return (
     <button className={`apex-q-row ${active ? 'active' : ''}`} onClick={onOpen} type="button">
@@ -73,7 +77,7 @@ const SidebarQuestion = ({ q, index, active, status, onOpen, onDuplicate, onRemo
   );
 };
 
-const Sidebar = ({ questions, currentId, statuses, onSelect, onAdd, onDuplicate, onRemove, onReviewAll, autosaveStatus, autosaveAt }) => {
+export const Sidebar = ({ questions, currentId, statuses, onSelect, onAdd, onDuplicate, onRemove, onReviewAll, autosaveStatus, autosaveAt }) => {
   const readyCount = Object.values(statuses).filter(s => s === 'ready').length;
   const incompleteCount = Object.values(statuses).filter(s => s === 'incomplete').length;
 
@@ -174,7 +178,7 @@ const Sidebar = ({ questions, currentId, statuses, onSelect, onAdd, onDuplicate,
 /* ────────────────────────────────────────────────────────────
    "Continuar rascunhos?" modal — shown on mount when storage has content
    ──────────────────────────────────────────────────────────── */
-const ResumeDraftsModal = ({ open, draftInfo, onContinue, onDiscard }) => {
+export const ResumeDraftsModal = ({ open, draftInfo, onContinue, onDiscard }) => {
   if (!open) return null;
   const { count, lastSavedAt } = draftInfo;
   const fmt = (t) => {
@@ -227,7 +231,10 @@ const ResumeDraftsModal = ({ open, draftInfo, onContinue, onDiscard }) => {
   );
 };
 
-Object.assign(window, {
-  questionStatus, STATUS_META, questionTitle,
-  Sidebar, SidebarQuestion, ResumeDraftsModal,
-});
+// Keep window global for backward compatibility
+if (typeof window !== 'undefined') {
+  Object.assign(window, {
+    questionStatus, STATUS_META, questionTitle,
+    Sidebar, SidebarQuestion, ResumeDraftsModal,
+  });
+}

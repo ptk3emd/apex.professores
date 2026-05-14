@@ -1,11 +1,13 @@
 // Apex Medicina — Criar questão autoral · Form (edit) view
-// Depends on: icons.jsx, data.js, React
+
+import React from 'react';
+import { Icon } from './icons.jsx';
 
 /* ────────────────────────────────────────────────────────────
    Field-level primitives
    ──────────────────────────────────────────────────────────── */
 
-const Label = ({ children, required, hint }) => (
+export const Label = ({ children, required, hint }) => (
   <div className="apex-label">
     <span>{children}</span>
     {required && <span className="req">*</span>}
@@ -13,14 +15,14 @@ const Label = ({ children, required, hint }) => (
   </div>
 );
 
-const HelperRow = ({ children, icon }) => (
+export const HelperRow = ({ children, icon }) => (
   <div style={{ display:'flex', alignItems:'flex-start', gap:8, fontSize:13, color:'#64748b', lineHeight:1.55, marginTop:-2, marginBottom:14 }}>
     {icon && <span style={{ marginTop:2, flexShrink:0, color:'#94a3b8' }}><Icon name={icon} size={15} /></span>}
     <span>{children}</span>
   </div>
 );
 
-const FieldError = ({ message }) =>
+export const FieldError = ({ message }) =>
   message ? (
     <div className="apex-helper">
       <Icon name="alertcircle" size={13} strokeWidth={2.2} />
@@ -32,7 +34,7 @@ const FieldError = ({ message }) =>
    Card shell — numbered, titled
    ──────────────────────────────────────────────────────────── */
 
-const FormCard = ({ index, title, eyebrow, subtitle, badge, children, error }) => (
+export const FormCard = ({ index, title, eyebrow, subtitle, badge, children, error }) => (
   <section className="apex-card apex-enter" style={{ padding:'28px 32px 32px', position:'relative' }}>
     <header style={{ display:'flex', alignItems:'flex-start', gap:16, marginBottom:22 }}>
       <div style={{
@@ -72,7 +74,7 @@ const FormCard = ({ index, title, eyebrow, subtitle, badge, children, error }) =
    Card 1 — Tipo de questão
    ──────────────────────────────────────────────────────────── */
 
-const TypeCard = ({ value, onChange, error }) => {
+export const TypeCard = ({ value, onChange, error }) => {
   const options = [
     { id:'me5', title:'Múltipla escolha A–E', sub:'5 alternativas. Formato padrão de provas de residência.', count:5 },
     { id:'me4', title:'Múltipla escolha A–D', sub:'4 alternativas. Comum em provas mais curtas.',           count:4 },
@@ -121,7 +123,7 @@ const TypeCard = ({ value, onChange, error }) => {
    Card 2 — Enunciado
    ──────────────────────────────────────────────────────────── */
 
-const EnunciadoCard = ({ value, onChange, image, onImage, onRemoveImage, caption, onCaption, error }) => {
+export const EnunciadoCard = ({ value, onChange, image, onImage, onRemoveImage, caption, onCaption, error }) => {
   const fileRef = React.useRef(null);
   const onPick = (e) => {
     const f = e.target.files?.[0];
@@ -287,7 +289,7 @@ const AlternativeBlock = ({ alt, type, onChange, onMarkCorrect, errorText, error
   );
 };
 
-const AlternativesCard = ({ type, alternatives, setAlternatives, errors }) => {
+export const AlternativesCard = ({ type, alternatives, setAlternatives, errors }) => {
   const isVF = type === 'vf';
   const correctCount = alternatives.filter(a => a.isCorrect).length;
   const updateOne = (idx, next) =>
@@ -332,7 +334,7 @@ const AlternativesCard = ({ type, alternatives, setAlternatives, errors }) => {
    Card 4 — Comentário geral
    ──────────────────────────────────────────────────────────── */
 
-const CommentCard = ({ value, onChange, error }) => (
+export const CommentCard = ({ value, onChange, error }) => (
   <FormCard index={4} eyebrow="Pedagogia" title="Comentário geral"
     subtitle="Explique o raciocínio da questão, o conceito central e o motivo do gabarito. É o ponto de partida da revisão do aluno.">
     <textarea
@@ -458,7 +460,7 @@ const TemaCombobox = ({ value, onChange, isNew, setIsNew, error }) => {
    Card 5 — Classificação pedagógica
    ──────────────────────────────────────────────────────────── */
 
-const ClassificationCard = ({ data, set, errors }) => {
+export const ClassificationCard = ({ data, set, errors }) => {
   const especialidades = data.categoria ? (window.ESPECIALIDADES[data.categoria] || []) : [];
   return (
     <FormCard index={5} eyebrow="Metadados" title="Classificação pedagógica"
@@ -588,7 +590,7 @@ const ClassificationCard = ({ data, set, errors }) => {
    Card 6 — Ações finais
    ──────────────────────────────────────────────────────────── */
 
-const ActionsCard = ({ onSaveDraft, onReview, draftSaved, errorList }) => {
+export const ActionsCard = ({ onSaveDraft, onReview, draftSaved, errorList }) => {
   const hasErrors = errorList && errorList.length > 0;
   return (
     <section className="apex-card apex-enter" style={{ padding:'24px 32px', position:'sticky', bottom:16, zIndex:10,
@@ -638,8 +640,11 @@ const ActionsCard = ({ onSaveDraft, onReview, draftSaved, errorList }) => {
   );
 };
 
-Object.assign(window, {
-  Label, FieldError, FormCard, HelperRow,
-  TypeCard, EnunciadoCard, AlternativesCard, CommentCard,
-  ClassificationCard, ActionsCard,
-});
+// Keep window global for backward compatibility
+if (typeof window !== 'undefined') {
+  Object.assign(window, {
+    Label, FieldError, FormCard, HelperRow,
+    TypeCard, EnunciadoCard, AlternativesCard, CommentCard,
+    ClassificationCard, ActionsCard,
+  });
+}

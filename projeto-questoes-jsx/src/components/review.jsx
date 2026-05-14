@@ -1,17 +1,19 @@
 // Apex Medicina — Criar questão autoral · Review (batch) + Send states
-// Depends on: icons.jsx, data.js, form.jsx, sidebar.jsx, React
+
+import React from 'react';
+import { Icon } from './icons.jsx';
 
 /* ────────────────────────────────────────────────────────────
    Sheet column order (matches Google Sheets target)
    ──────────────────────────────────────────────────────────── */
 
-const SHEET_COLUMNS = [
+export const SHEET_COLUMNS = [
   'id','categoria','especialidade','tema_especifico','competencias','ano','origem',
   'enunciado','a','b','c','d','e','correta',
   'comentario','justificativa_a','justificativa_b','justificativa_c','justificativa_d','justificativa_e',
 ];
 
-function buildSheetRow(q, generatedId) {
+export function buildSheetRow(q, generatedId) {
   const isVF = q.type === 'vf';
   const isME4 = q.type === 'me4';
   const altByLetter = (letter) => q.alternatives.find(a => a.id === letter);
@@ -64,7 +66,7 @@ function buildSheetRow(q, generatedId) {
   };
 }
 
-function truncate(str, n = 70) {
+export function truncate(str, n = 70) {
   if (!str) return '';
   return str.length > n ? str.slice(0, n - 1) + '…' : str;
 }
@@ -73,7 +75,7 @@ function truncate(str, n = 70) {
    Student preview (single question) — quiz-like
    ──────────────────────────────────────────────────────────── */
 
-const StudentPreview = ({ state, compact }) => {
+export const StudentPreview = ({ state, compact }) => {
   const isVF = state.type === 'vf';
   const isME4 = state.type === 'me4';
   const visibleAlts = isVF
@@ -170,7 +172,7 @@ const StudentPreview = ({ state, compact }) => {
    Pending list — per-question issues
    ──────────────────────────────────────────────────────────── */
 
-const PendingList = ({ items, questionLabel }) => (
+export const PendingList = ({ items, questionLabel }) => (
   <div style={{
     background:'#fffbeb', border:'1px solid #fde68a', borderRadius:12,
     padding:'12px 14px', display:'flex', gap:11, alignItems:'flex-start',
@@ -191,7 +193,7 @@ const PendingList = ({ items, questionLabel }) => (
    Compact per-question review card
    ──────────────────────────────────────────────────────────── */
 
-const QuestionReviewCard = ({ q, index, status, pending, generatedId, onEdit, onRemove, showPending }) => {
+export const QuestionReviewCard = ({ q, index, status, pending, generatedId, onEdit, onRemove, showPending }) => {
   const meta = STATUS_META[status];
   const cat = window.CATEGORIES.find(c => c.code === q.categoria);
   const hasJustifications = q.alternatives.some(a => a.justification?.trim());
@@ -320,7 +322,7 @@ const QuestionReviewCard = ({ q, index, status, pending, generatedId, onEdit, on
    Multi-row sheet preview
    ──────────────────────────────────────────────────────────── */
 
-const BatchSheetPreview = ({ rows, types }) => {
+export const BatchSheetPreview = ({ rows, types }) => {
   const showCount = rows.length;
   return (
     <div className="apex-card" style={{ padding:'24px 26px' }}>
@@ -396,7 +398,7 @@ const BatchSheetPreview = ({ rows, types }) => {
    Batch Review Screen
    ──────────────────────────────────────────────────────────── */
 
-const BatchReviewScreen = ({ questions, generatedIds, statuses, pending, onEdit, onRemove, onBack, onSendAll, onSendCompletesOnly, showPending }) => {
+export const BatchReviewScreen = ({ questions, generatedIds, statuses, pending, onEdit, onRemove, onBack, onSendAll, onSendCompletesOnly, showPending }) => {
   const completesIds = questions.filter(q => statuses[q.id] === 'ready').map(q => q.id);
   const completes = completesIds.length;
   const incompletes = questions.length - completes;
@@ -533,7 +535,7 @@ const BatchReviewScreen = ({ questions, generatedIds, statuses, pending, onEdit,
    Send states — sending, success (offer clear drafts), error
    ──────────────────────────────────────────────────────────── */
 
-const SendingPanel = ({ count }) => (
+export const SendingPanel = ({ count }) => (
   <div className="apex-card apex-enter" style={{ padding:'56px 32px', textAlign:'center', maxWidth:560, margin:'40px auto' }}>
     <div style={{
       width:72, height:72, borderRadius:9999, background:'#FCF4F4',
@@ -563,7 +565,7 @@ const SendingPanel = ({ count }) => (
   </div>
 );
 
-const SuccessPanel = ({ sentIds, remainingCount, onNew, onClearSent, onContinue }) => {
+export const SuccessPanel = ({ sentIds, remainingCount, onNew, onClearSent, onContinue }) => {
   const count = sentIds.length;
   return (
     <div className="apex-card apex-enter" style={{ padding:'48px 32px', textAlign:'center', maxWidth:620, margin:'40px auto' }}>
@@ -638,7 +640,7 @@ const SuccessPanel = ({ sentIds, remainingCount, onNew, onClearSent, onContinue 
   );
 };
 
-const ErrorPanel = ({ onRetry, onBack }) => (
+export const ErrorPanel = ({ onRetry, onBack }) => (
   <div className="apex-card apex-enter" style={{ padding:'48px 32px', textAlign:'center', maxWidth:560, margin:'40px auto' }}>
     <div style={{
       width:80, height:80, borderRadius:9999, background:'#fef2f2',
@@ -669,8 +671,11 @@ const ErrorPanel = ({ onRetry, onBack }) => (
   </div>
 );
 
-Object.assign(window, {
-  SHEET_COLUMNS, buildSheetRow, truncate,
-  StudentPreview, PendingList, QuestionReviewCard, BatchSheetPreview,
-  BatchReviewScreen, SendingPanel, SuccessPanel, ErrorPanel,
-});
+// Keep window global for backward compatibility
+if (typeof window !== 'undefined') {
+  Object.assign(window, {
+    SHEET_COLUMNS, buildSheetRow, truncate,
+    StudentPreview, PendingList, QuestionReviewCard, BatchSheetPreview,
+    BatchReviewScreen, SendingPanel, SuccessPanel, ErrorPanel,
+  });
+}

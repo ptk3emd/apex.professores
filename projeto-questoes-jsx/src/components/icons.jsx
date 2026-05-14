@@ -1,7 +1,8 @@
 // Apex Medicina — Lucide-style icons used in Criar Questão flow
-// Load with: <script type="text/babel" src="icons.jsx"></script>
 
-const Icon = ({ name, size = 18, color = "currentColor", strokeWidth = 2, style }) => {
+import React from 'react';
+
+export const Icon = ({ name, size = 18, color = "currentColor", strokeWidth = 2, style }) => {
   const p = {
     plus:        <><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></>,
     minus:       <line x1="5" y1="12" x2="19" y2="12"/>,
@@ -63,7 +64,7 @@ const Icon = ({ name, size = 18, color = "currentColor", strokeWidth = 2, style 
 };
 
 // Apex logo mark
-const ApexLogo = ({ size = 26, color = "#A43939" }) => (
+export const ApexLogo = ({ size = 26, color = "#A43939" }) => (
   <svg width={size} height={Math.round(size * 0.875)} viewBox="0 0 778 681" fill="none">
     <path d="M399.965 19.1338C606.028 19.1338 773.076 186.181 773.076 392.244C773.075 495.414 731.2 588.803 663.521 656.344L592.108 532.994L529.551 613.425L431.246 486.076L353.049 329.683L272.619 486.076L141.051 660.898C70.6494 593.032 26.855 497.753 26.8549 392.244C26.8549 186.181 193.902 19.1339 399.965 19.1338Z" fill={color}/>
     <path d="M250.83 27.4773C302.999 3.92465 361.084 -0.483885 399.97 0.039786C413.468 0.0854183 424.79 0.436259 433.526 0.145255C467.817 -0.0196591 469.767 11.4027 515.817 21.741C561.859 33.9359 587.783 49.4212 619.643 75.7058C655.248 98.8254 733.485 197.14 751.337 240.093C774.769 280.513 776.731 335.058 776.296 365.6C776.347 375.322 775.677 382.819 774.853 388.647C774.501 391.108 773.711 392.243 772.939 392.244H772.937C771.973 392.241 771.036 390.491 770.876 387.373C770.106 372.334 767.29 349.621 758.984 324.422C741.741 278.604 748.773 270.202 715.36 213.133C678.263 158.704 647.771 133.157 586.928 88.1355C522.383 48.8234 500.309 53.896 399.97 39.2165C398.615 39.0931 397.244 38.9733 395.859 38.8562C288.71 37.1782 277.35 61.6458 194.572 118.485C109.798 178.617 50.2322 303.955 51.487 368.394C51.0753 376.084 50.9167 383.935 51.0485 392.244C51.5411 452.121 70.5235 526.884 114.379 592.391C125.466 609.903 139.397 626.466 155.461 641.748L126.504 680.225C119.428 673.604 112.747 666.805 106.58 659.876C50.2167 609.815 -4.00426 472.405 0.233115 392.244C-0.0286162 382.104 0.0247221 373.165 0.15792 365.322C3.9783 296.521 13.2747 297.05 35.0642 247.38C59.3096 199.713 66.3361 151.384 116.891 103.813C169.434 60.036 182.858 61.1148 250.83 27.4775Z" fill={color}/>
@@ -72,7 +73,7 @@ const ApexLogo = ({ size = 26, color = "#A43939" }) => (
 );
 
 // Spinner (CSS-driven)
-const Spinner = ({ size = 18, color = "currentColor" }) => (
+export const Spinner = ({ size = 18, color = "currentColor" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
     stroke={color} strokeWidth="2.5" strokeLinecap="round"
     style={{ animation: "apex-spin 0.9s linear infinite" }}>
@@ -80,4 +81,7 @@ const Spinner = ({ size = 18, color = "currentColor" }) => (
   </svg>
 );
 
-Object.assign(window, { Icon, ApexLogo, Spinner });
+// Keep window global for backward compatibility
+if (typeof window !== 'undefined') {
+  Object.assign(window, { Icon, ApexLogo, Spinner });
+}

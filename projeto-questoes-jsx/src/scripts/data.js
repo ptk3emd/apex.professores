@@ -1,6 +1,6 @@
 // Apex Medicina — Criar questão autoral · datasets
 
-window.CATEGORIES = [
+export const CATEGORIES = [
   { code: "CM",   label: "Clínica Médica",            accent: "#A43939", soft: "#FCF4F4" },
   { code: "GO",   label: "Ginecologia e Obstetrícia", accent: "#7c3aed", soft: "#faf5ff" },
   { code: "PED",  label: "Pediatria",                 accent: "#16a34a", soft: "#f0fdf4" },
@@ -12,7 +12,7 @@ window.CATEGORIES = [
 ];
 
 // Especialidades por categoria (lista representativa)
-window.ESPECIALIDADES = {
+export const ESPECIALIDADES = {
   CM:   ["Cardiologia", "Pneumologia", "Endocrinologia", "Gastroenterologia", "Nefrologia",
          "Hematologia", "Infectologia", "Reumatologia", "Neurologia", "Geriatria",
          "Dermatologia", "Oftalmologia", "Otorrinolaringologia"],
@@ -30,7 +30,7 @@ window.ESPECIALIDADES = {
 
 // Lista representativa de temas específicos
 // (placeholder — substituir pela lista oficial)
-window.TEMAS = [
+export const TEMAS = [
   "Infarto Agudo do Miocárdio com Supradesnivelamento de ST",
   "Síndrome Coronariana Aguda sem Supra de ST",
   "Insuficiência Cardíaca Descompensada",
@@ -94,7 +94,7 @@ window.TEMAS = [
   "Notificação Compulsória",
 ];
 
-window.COMPETENCIAS = [
+export const COMPETENCIAS = [
   "Diagnóstico",
   "Epidemiologia",
   "Fisiologia/Fisiopatologia/Anatomia",
@@ -102,8 +102,13 @@ window.COMPETENCIAS = [
   "Outro mais específico",
 ];
 
-window.ORIGENS = [
+export const ORIGENS = [
   "Adaptada",
   "UNIFASE",
   "Outro",
 ];
+
+// Keep window global for backward compatibility during migration
+if (typeof window !== 'undefined') {
+  Object.assign(window, { CATEGORIES, ESPECIALIDADES, TEMAS, COMPETENCIAS, ORIGENS });
+}

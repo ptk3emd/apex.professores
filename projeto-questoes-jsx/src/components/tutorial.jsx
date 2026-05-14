@@ -1,7 +1,9 @@
 // Apex Medicina — Help / Tutorial modal
-// Loaded as: <script type="text/babel" src="tutorial.jsx"></script>
 
-const TUTORIAL_SECTIONS = [
+import React, { useState } from 'react';
+import { Icon } from './icons.jsx';
+
+export const TUTORIAL_SECTIONS = [
   {
     id: 'overview',
     title: 'Visão geral',
@@ -133,7 +135,7 @@ const TUTORIAL_SECTIONS = [
   },
 ];
 
-const TutorialModal = ({ open, onClose }) => {
+export const TutorialModal = ({ open, onClose }) => {
   const [activeId, setActiveId] = React.useState('overview');
   const contentRef = React.useRef(null);
   const sectionRefs = React.useRef({});
@@ -327,4 +329,7 @@ const TutorialModal = ({ open, onClose }) => {
   );
 };
 
-Object.assign(window, { TUTORIAL_SECTIONS, TutorialModal });
+// Keep window global for backward compatibility
+if (typeof window !== 'undefined') {
+  Object.assign(window, { TUTORIAL_SECTIONS, TutorialModal });
+}

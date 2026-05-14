@@ -1,5 +1,16 @@
 // Apex Medicina — Criar questão autoral · main App (multi-question, autosave, tutorial)
-// Composes Form / Sidebar / Review / Send screens.
+
+import React, { useState, useCallback, useEffect } from 'react';
+import ReactDOM from 'react-dom/client';
+
+// Import all components
+import { Icon, ApexLogo, Spinner } from './icons.jsx';
+import { Label, FieldError, FormCard, HelperRow, TypeCard, EnunciadoCard, AlternativesCard, CommentCard, ClassificationCard, ActionsCard } from './form.jsx';
+import { questionStatus, STATUS_META, questionTitle, Sidebar, SidebarQuestion, ResumeDraftsModal } from './sidebar.jsx';
+import { SHEET_COLUMNS, buildSheetRow, truncate, StudentPreview, PendingList, QuestionReviewCard, BatchSheetPreview, BatchReviewScreen, SendingPanel, SuccessPanel, ErrorPanel } from './review.jsx';
+import { TUTORIAL_SECTIONS, TutorialModal } from './tutorial.jsx';
+import { CATEGORIES, ESPECIALIDADES, TEMAS, COMPETENCIAS, ORIGENS } from '../scripts/data.js';
+import { ApexStorage, APEX_STORAGE_KEY } from '../scripts/storage.js';
 
 const ALPHABET = ['A', 'B', 'C', 'D', 'E'];
 
@@ -346,7 +357,7 @@ const EditView = ({
 /* ────────────────────────────────────────────────────────────
    App
    ──────────────────────────────────────────────────────────── */
-function App() {
+export default function App() {
   const [phase, setPhase] = React.useState('edit'); // edit | review | sending | success | error
   const [questions, setQuestions] = React.useState([newQuestion()]);
   const [currentId, setCurrentId] = React.useState(null);
@@ -671,5 +682,3 @@ function App() {
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App/>);
