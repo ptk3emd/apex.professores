@@ -118,10 +118,10 @@ const TopBar = ({ phase, autosaveStatus, autosaveAt, questionCount, onHelp }) =>
       background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(14px)',
       borderBottom: '1px solid #ececea',
     }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '14px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+      <div className="apex-topbar-inner" style={{ maxWidth: 1280, margin: '0 auto', padding: '14px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
           <ApexLogo size={28}/>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#64748b', fontWeight: 500 }}>
+          <div className="apex-topbar-breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#64748b', fontWeight: 500 }}>
             <span style={{ fontWeight: 700, color: '#0f172a' }}>Apex Med</span>
             <Icon name="chevronright" size={12} color="#cbd5e1"/>
             <span>Banco de questões</span>
@@ -129,7 +129,7 @@ const TopBar = ({ phase, autosaveStatus, autosaveAt, questionCount, onHelp }) =>
             <span style={{ color: '#0f172a', fontWeight: 600 }}>Criar questão autoral</span>
           </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        <div className="apex-topbar-right" style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
           {/* Autosave indicator */}
           <span className="apex-toast">
             {autosaveStatus === 'saving' ? (
@@ -147,7 +147,7 @@ const TopBar = ({ phase, autosaveStatus, autosaveAt, questionCount, onHelp }) =>
           <button onClick={onHelp} className="apex-btn"
             style={{ padding: '8px 13px', fontSize: 13, background: '#FCF4F4', color: '#A43939', border: '1px solid #F7E1E1' }}>
             <Icon name="helpcircle" size={15}/>
-            Preciso de ajuda
+            <span className="apex-topbar-help-text">Preciso de ajuda</span>
           </button>
           <div style={{
             width: 36, height: 36, borderRadius: 9999, background: '#A43939', color: 'white',
@@ -177,25 +177,25 @@ const HeroSteps = ({ phase, sectionsValid }) => {
     { n: 4, label: 'Enviar' },
   ];
   return (
-    <section style={{ padding: '32px 0 24px' }}>
+    <section className="apex-hero-section" style={{ padding: '32px 0 24px' }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
         <div style={{ maxWidth: 720 }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '5px 11px',
+          <div className="apex-hero-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '5px 11px',
             background: '#FCF4F4', border: '1px solid #F7E1E1', borderRadius: 9999,
             fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#A43939', marginBottom: 14,
           }}>
             <Icon name="sparkles" size={12}/> Área do professor · Apex-CORE
           </div>
-          <h1 style={{ fontSize: 38, fontWeight: 900, color: '#0f172a', margin: 0, letterSpacing: '-0.025em', lineHeight: 1.1 }}>
+          <h1 className="apex-hero-h1" style={{ fontSize: 38, fontWeight: 900, color: '#0f172a', margin: 0, letterSpacing: '-0.025em', lineHeight: 1.1 }}>
             Nova questão de estudo
           </h1>
-          <p style={{ fontSize: 16, color: '#475569', margin: '10px 0 0', maxWidth: 620, lineHeight: 1.55, fontWeight: 500 }}>
+          <p className="apex-hero-desc" style={{ fontSize: 16, color: '#475569', margin: '10px 0 0', maxWidth: 620, lineHeight: 1.55, fontWeight: 500 }}>
             Cadastre questões completas com alternativas, justificativas e classificação pedagógica. Sua questão entra no banco de dados para revisão antes de ir ao banco oficial.
           </p>
         </div>
       </div>
 
-      <div style={{
+      <div className="apex-steps-bar" style={{
         marginTop: 28, padding: '18px 22px',
         background: 'white', border: '1px solid #ececea', borderRadius: 16,
         display: 'flex', alignItems: 'center', gap: 12,
@@ -206,8 +206,8 @@ const HeroSteps = ({ phase, sectionsValid }) => {
           const isDone = s.n < current;
           return (
             <React.Fragment key={s.n}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 11, flex: 1, minWidth: 0 }}>
-                <div style={{
+              <div className="apex-step-item" style={{ display: 'flex', alignItems: 'center', gap: 11, flex: 1, minWidth: 0 }}>
+                <div className="apex-step-icon" style={{
                   flexShrink: 0, width: 34, height: 34, borderRadius: 10,
                   background: isDone ? '#16a34a' : isCurrent ? '#A43939' : '#f1f5f9',
                   color: isDone || isCurrent ? 'white' : '#94a3b8',
@@ -219,16 +219,16 @@ const HeroSteps = ({ phase, sectionsValid }) => {
                   {isDone ? <Icon name="check" size={15} strokeWidth={3}/> : s.n}
                 </div>
                 <div style={{ minWidth: 0 }}>
-                  <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#94a3b8' }}>
+                  <div className="apex-step-eyebrow" style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#94a3b8' }}>
                     Etapa 0{s.n}
                   </div>
-                  <div style={{ fontSize: 13.5, fontWeight: 700, color: isCurrent || isDone ? '#0f172a' : '#94a3b8', marginTop: 1 }}>
+                  <div className="apex-step-label" style={{ fontSize: 13.5, fontWeight: 700, color: isCurrent || isDone ? '#0f172a' : '#94a3b8', marginTop: 1 }}>
                     {s.label}
                   </div>
                 </div>
               </div>
               {i < steps.length - 1 && (
-                <div style={{
+                <div className="apex-step-connector" style={{
                   flex: 0, width: 32, height: 2, borderRadius: 9999,
                   background: isDone ? '#16a34a' : '#e2e8f0',
                   transition: 'background .25s ease',
@@ -248,14 +248,14 @@ const HeroSteps = ({ phase, sectionsValid }) => {
 const QuestionFormFooter = ({ status, pending, attempted, onAdd, onReview }) => {
   const meta = window.STATUS_META[status];
   return (
-    <section className="apex-card apex-enter" style={{ padding: '20px 24px' }}>
+    <section className="apex-card apex-enter apex-q-footer" style={{ padding: '20px 24px' }}>
       {attempted && pending.length > 0 && (
         <div style={{ marginBottom: 14 }}>
           <PendingList items={pending} questionLabel="Para enviar esta questão, ajuste"/>
         </div>
       )}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14, flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+      <div className="apex-q-footer-inner" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14, flexWrap: 'wrap' }}>
+        <div className="apex-footer-status" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span className={`apex-status-dot ${status}`} style={{ width: 10, height: 10 }}/>
           <span style={{ fontSize: 12.5, fontWeight: 700, color: meta.color, letterSpacing: '.04em', textTransform: 'uppercase' }}>
             {meta.label}
@@ -264,7 +264,7 @@ const QuestionFormFooter = ({ status, pending, attempted, onAdd, onReview }) => 
             · seu trabalho fica salvo neste navegador automaticamente.
           </span>
         </div>
-        <div style={{ display: 'flex', gap: 10 }}>
+        <div className="apex-q-footer-buttons" style={{ display: 'flex', gap: 10 }}>
           <button onClick={onAdd} className="apex-btn apex-btn-secondary">
             <Icon name="plus" size={15}/>
             Adicionar outra questão
@@ -665,7 +665,7 @@ export default function App() {
         questionCount={questions.length}
         onHelp={() => setShowTutorial(true)}
       />
-      <main style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px 80px' }}>
+      <main className="apex-main" style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px 80px' }}>
         <HeroSteps phase={phase} sectionsValid={sectionsValid}/>
         {content}
       </main>
