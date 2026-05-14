@@ -1,0 +1,20 @@
+name = "apex-professores"
+type = "javascript"
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+
+[build]
+command = "npm run build"
+cwd = "./"
+watch_paths = ["src/**/*.jsx", "src/**/*.js", "src/**/*.css", "index.html"]
+
+[build.upload]
+format = "service-worker"
+
+[env.production]
+name = "apex-professores-prod"
+routes = [
+  { pattern = "apex-professores.pages.dev", zone_name = "pages.dev" }
+]
