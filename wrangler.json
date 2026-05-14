@@ -1,9 +1,7 @@
 {
-  "pages_build_configuration": {
-    "build": {
-      "cwd": "projeto-questoes-jsx",
-      "command": "npm run build",
-      "root_dir": "dist"
-    }
+  "build": {
+    "cwd": "projeto-questoes-jsx",
+    "command": "npm run build",
+    "root_dir": "dist"
   }
 }
