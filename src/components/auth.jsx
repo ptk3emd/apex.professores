@@ -19,43 +19,6 @@ const clerkAppearance = {
     fontSize: '14px',
     fontFamily: "'Atkinson Hyperlegible', Arial, system-ui, sans-serif",
   },
-  elements: {
-    button: {
-      backgroundColor: '#A43939',
-      color: '#f8fafc',
-      border: 'none',
-      borderRadius: '50px',
-      fontWeight: '700',
-      fontSize: '14px',
-      padding: '12px 28px',
-      letterSpacing: '0.05em',
-      textTransform: 'uppercase',
-      cursor: 'pointer',
-      transition: 'all 0.25s ease',
-      boxShadow: '0 0 24px rgba(164,57,57,0.25)',
-      width: '100%',
-      fontFamily: "'Atkinson Hyperlegible', Arial, system-ui, sans-serif",
-      '&:hover': {
-        backgroundColor: '#913232',
-        boxShadow: '0 0 40px rgba(164,57,57,0.4)',
-        transform: 'translateY(-2px)',
-      },
-      '&:active': {
-        transform: 'scale(0.98)',
-      },
-    },
-    buttonPrimary: {
-      backgroundColor: '#A43939',
-      color: '#f8fafc',
-      '&:hover': {
-        backgroundColor: '#913232',
-      },
-    },
-    footerActionLink: {
-      color: '#7a7468',
-      textDecoration: 'none',
-    },
-  },
 };
 
 export default function AuthScreen() {
@@ -214,10 +177,15 @@ export default function AuthScreen() {
 
       {/* Global Clerk button styling overrides */}
       <style>{`
-        /* Clerk button base styles */
+        /* Clerk button base styles - comprehensive targeting */
         [class*="cl-button"],
+        [class*="cl-authLayoutCard"] button,
+        [class*="cl-signUp"] button,
+        [class*="cl-signIn"] button,
+        [class*="cl-internal"] button,
         button[type="submit"],
-        [class*="cl-internal"] button {
+        .cl-formButtonPrimary,
+        [class*="cl-"] button[type="button"] {
           background-color: #A43939 !important;
           color: #f8fafc !important;
           border-radius: 50px !important;
@@ -227,33 +195,56 @@ export default function AuthScreen() {
           letter-spacing: 0.05em !important;
           text-transform: uppercase !important;
           transition: all 0.25s ease !important;
-          box-shadow: 0 0 24px rgba(164,57,57,.25) !important;
+          box-shadow: 0 0 24px rgba(164,57,57,0.25) !important;
           border: none !important;
           width: 100% !important;
           font-family: 'Atkinson Hyperlegible', Arial, system-ui, sans-serif !important;
+          cursor: pointer !important;
+          display: inline-block !important;
+          text-align: center !important;
         }
 
+        /* Hover state */
         [class*="cl-button"]:hover,
+        [class*="cl-authLayoutCard"] button:hover,
+        [class*="cl-signUp"] button:hover,
+        [class*="cl-signIn"] button:hover,
+        [class*="cl-internal"] button:hover,
         button[type="submit"]:hover,
-        [class*="cl-internal"] button:hover {
+        .cl-formButtonPrimary:hover,
+        [class*="cl-"] button[type="button"]:hover {
           background-color: #913232 !important;
-          box-shadow: 0 0 40px rgba(164,57,57,.4) !important;
+          box-shadow: 0 0 40px rgba(164,57,57,0.4) !important;
           transform: translateY(-2px) !important;
         }
 
+        /* Active/pressed state */
         [class*="cl-button"]:active,
+        [class*="cl-authLayoutCard"] button:active,
+        [class*="cl-signUp"] button:active,
+        [class*="cl-signIn"] button:active,
+        [class*="cl-internal"] button:active,
         button[type="submit"]:active,
-        [class*="cl-internal"] button:active {
+        .cl-formButtonPrimary:active,
+        [class*="cl-"] button[type="button"]:active {
           transform: scale(0.98) !important;
         }
 
+        /* Focus state for accessibility */
+        [class*="cl-button"]:focus-visible,
+        button[type="submit"]:focus-visible {
+          outline: 2px solid rgba(164,57,57,0.5) !important;
+          outline-offset: 2px !important;
+        }
+
         /* Clerk component typography */
-        [class*="cl-"] * {
+        [class*="cl-"] {
           font-family: 'Atkinson Hyperlegible', Arial, system-ui, sans-serif !important;
         }
 
         /* Clerk form inputs */
         [class*="cl-input"],
+        [class*="cl-input"] input,
         input[type="email"],
         input[type="password"] {
           background-color: rgba(255,255,255,0.04) !important;
@@ -263,11 +254,29 @@ export default function AuthScreen() {
           font-family: 'Atkinson Hyperlegible', Arial, system-ui, sans-serif !important;
         }
 
+        /* Input focus state */
         [class*="cl-input"]:focus,
+        [class*="cl-input"] input:focus,
         input[type="email"]:focus,
         input[type="password"]:focus {
           border-color: #A43939 !important;
           box-shadow: 0 0 0 3px rgba(164,57,57,0.25) !important;
+        }
+
+        /* Clerk label and text styling */
+        [class*="cl-label"],
+        [class*="cl-signUp"] label,
+        [class*="cl-signIn"] label {
+          color: #f8fafc !important;
+          font-family: 'Atkinson Hyperlegible', Arial, system-ui, sans-serif !important;
+        }
+
+        /* Clerk card and modal overrides */
+        [class*="cl-card"],
+        [class*="cl-modalContent"],
+        [class*="cl-authLayoutCard"] {
+          background: rgba(255,255,255,0.04) !important;
+          border-color: rgba(255,255,255,0.07) !important;
         }
       `}</style>
     </div>
