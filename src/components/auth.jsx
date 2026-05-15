@@ -4,6 +4,60 @@ import React from 'react';
 import { SignUpButton, SignInButton } from '@clerk/react';
 import { ApexLogo } from './icons.jsx';
 
+// Clerk appearance theme for ApexMed design system
+const clerkAppearance = {
+  baseTheme: undefined,
+  variables: {
+    colorBackground: 'rgba(255,255,255,0.02)',
+    colorInputBackground: 'transparent',
+    colorInputText: '#f8fafc',
+    colorText: '#f8fafc',
+    colorTextSecondary: '#7a7468',
+    colorPrimary: '#A43939',
+    colorDanger: '#dc2626',
+    borderRadius: '12px',
+    fontSize: '14px',
+    fontFamily: "'Atkinson Hyperlegible', Arial, system-ui, sans-serif",
+  },
+  elements: {
+    button: {
+      backgroundColor: '#A43939',
+      color: '#f8fafc',
+      border: 'none',
+      borderRadius: '50px',
+      fontWeight: '700',
+      fontSize: '14px',
+      padding: '12px 28px',
+      letterSpacing: '0.05em',
+      textTransform: 'uppercase',
+      cursor: 'pointer',
+      transition: 'all 0.25s ease',
+      boxShadow: '0 0 24px rgba(164,57,57,0.25)',
+      width: '100%',
+      fontFamily: "'Atkinson Hyperlegible', Arial, system-ui, sans-serif",
+      '&:hover': {
+        backgroundColor: '#913232',
+        boxShadow: '0 0 40px rgba(164,57,57,0.4)',
+        transform: 'translateY(-2px)',
+      },
+      '&:active': {
+        transform: 'scale(0.98)',
+      },
+    },
+    buttonPrimary: {
+      backgroundColor: '#A43939',
+      color: '#f8fafc',
+      '&:hover': {
+        backgroundColor: '#913232',
+      },
+    },
+    footerActionLink: {
+      color: '#7a7468',
+      textDecoration: 'none',
+    },
+  },
+};
+
 export default function AuthScreen() {
   return (
     <div style={{
@@ -103,14 +157,10 @@ export default function AuthScreen() {
               }} />
               Criar Conta
             </h2>
-            <div style={{
-              backgroundColor: 'rgba(255,255,255,.02)',
-              borderRadius: 12,
-              padding: '12px 0',
-              border: '1px solid rgba(164,57,57,.1)',
-            }}>
-              <SignUpButton mode="modal" />
-            </div>
+            <SignUpButton
+              mode="modal"
+              appearance={clerkAppearance}
+            />
           </div>
 
           {/* Divider */}
@@ -141,14 +191,10 @@ export default function AuthScreen() {
               }} />
               Entrar
             </h2>
-            <div style={{
-              backgroundColor: 'rgba(255,255,255,.02)',
-              borderRadius: 12,
-              padding: '12px 0',
-              border: '1px solid rgba(164,57,57,.1)',
-            }}>
-              <SignInButton mode="modal" />
-            </div>
+            <SignInButton
+              mode="modal"
+              appearance={clerkAppearance}
+            />
           </div>
         </div>
 
@@ -166,11 +212,12 @@ export default function AuthScreen() {
         </p>
       </div>
 
-      {/* CSS for Clerk button styling override */}
+      {/* Global Clerk button styling overrides */}
       <style>{`
-        /* Override Clerk SignInButton/SignUpButton appearance */
-        [data-testid*="clerk"] button,
-        button[type="submit"] {
+        /* Clerk button base styles */
+        [class*="cl-button"],
+        button[type="submit"],
+        [class*="cl-internal"] button {
           background-color: #A43939 !important;
           color: #f8fafc !important;
           border-radius: 50px !important;
@@ -179,23 +226,48 @@ export default function AuthScreen() {
           padding: 12px 28px !important;
           letter-spacing: 0.05em !important;
           text-transform: uppercase !important;
-          transition: all 0.25s !important;
+          transition: all 0.25s ease !important;
           box-shadow: 0 0 24px rgba(164,57,57,.25) !important;
+          border: none !important;
+          width: 100% !important;
+          font-family: 'Atkinson Hyperlegible', Arial, system-ui, sans-serif !important;
         }
 
-        button[type="submit"]:hover {
+        [class*="cl-button"]:hover,
+        button[type="submit"]:hover,
+        [class*="cl-internal"] button:hover {
           background-color: #913232 !important;
           box-shadow: 0 0 40px rgba(164,57,57,.4) !important;
           transform: translateY(-2px) !important;
         }
 
-        button[type="submit"]:active {
+        [class*="cl-button"]:active,
+        button[type="submit"]:active,
+        [class*="cl-internal"] button:active {
           transform: scale(0.98) !important;
         }
 
-        /* Ensure Clerk components use correct font */
-        [data-testid*="clerk"] * {
+        /* Clerk component typography */
+        [class*="cl-"] * {
           font-family: 'Atkinson Hyperlegible', Arial, system-ui, sans-serif !important;
+        }
+
+        /* Clerk form inputs */
+        [class*="cl-input"],
+        input[type="email"],
+        input[type="password"] {
+          background-color: rgba(255,255,255,0.04) !important;
+          border: 1px solid rgba(255,255,255,0.07) !important;
+          color: #f8fafc !important;
+          border-radius: 12px !important;
+          font-family: 'Atkinson Hyperlegible', Arial, system-ui, sans-serif !important;
+        }
+
+        [class*="cl-input"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+          border-color: #A43939 !important;
+          box-shadow: 0 0 0 3px rgba(164,57,57,0.25) !important;
         }
       `}</style>
     </div>
