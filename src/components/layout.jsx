@@ -1,8 +1,7 @@
 // Apex Professores — Layout Router (handles auth state)
 
 import React from 'react';
-import { useUser } from '@clerk/react';
-import AuthScreen from './auth.jsx';
+import { useUser, RedirectToSignIn } from '@clerk/react';
 import App from './app.jsx';
 
 const LoadingScreen = () => (
@@ -34,7 +33,7 @@ export default function Layout() {
   }
 
   if (!isSignedIn) {
-    return <AuthScreen />;
+    return <RedirectToSignIn />;
   }
 
   return <App />;
