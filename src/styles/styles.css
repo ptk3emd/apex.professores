@@ -3,11 +3,14 @@
    Only base / unscoped interactive styles. Layout is inline.
    ───────────────────────────────────────────────────────────── */
 
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+
 html, body {
   margin: 0;
   padding: 0;
   background: #f5f4f1;
   color: rgb(15 23 42);
+  font-family: 'Atkinson Hyperlegible', Arial, system-ui, sans-serif;
 }
 
 #root {
