@@ -11,7 +11,7 @@ import Layout from './components/layout.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY} afterSignOutUrl="/">
+    <ClerkProvider afterSignOutUrl="/">
       <Layout />
     </ClerkProvider>
   </React.StrictMode>,
