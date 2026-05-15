@@ -6,13 +6,13 @@ import { ClerkProvider } from '@clerk/react'
 import './styles/styles.css'
 import './styles/tokens.css'
 
-// Import App component (which imports all dependencies)
-import App from './components/app.jsx'
+// Import Layout (router between auth and app)
+import Layout from './components/layout.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY} afterSignOutUrl="/">
-      <App />
+      <Layout />
     </ClerkProvider>
   </React.StrictMode>,
 )

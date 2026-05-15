@@ -1,7 +1,7 @@
 // Apex Medicina — Criar questão autoral · main App (multi-question, autosave, tutorial)
 
 import React, { useState, useCallback, useEffect } from 'react';
-import { SignInButton, UserButton, Show } from '@clerk/react';
+import { UserButton } from '@clerk/react';
 
 // Import all components
 import { Icon, ApexLogo, Spinner } from './icons.jsx';
@@ -150,12 +150,7 @@ const TopBar = ({ phase, autosaveStatus, autosaveAt, questionCount, onHelp }) =>
             <Icon name="helpcircle" size={15}/>
             <span className="apex-topbar-help-text">Preciso de ajuda</span>
           </button>
-          <Show when="signed-in">
-            <UserButton afterSignOutUrl="/" />
-          </Show>
-          <Show when="signed-out">
-            <SignInButton mode="modal" />
-          </Show>
+          <UserButton afterSignOutUrl="/" />
         </div>
       </div>
     </header>
