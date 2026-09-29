@@ -1,0 +1,21 @@
+# Private tool: keep every response out of search indexes, even when a link to
+# it is shared publicly (robots.txt alone does not stop a linked URL from
+# being listed).
+#
+# No Content-Security-Policy on purpose: Clerk loads its scripts and frames
+# from its own Frontend API host, which differs per Clerk instance. Add a CSP
+# only together with that host, or sign-in breaks.
+/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+
+# Hashed build output is content-addressed.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/index.html
+  Cache-Control: no-cache

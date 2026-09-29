@@ -1,0 +1,5 @@
+# Apex Professores is a private, login-only tool for writing exam questions.
+# It has no public page, so nothing here should be crawled or indexed.
+# The public site is https://apexmedicina.com.br (see its robots.txt and sitemap).
+User-agent: *
+Disallow: /
